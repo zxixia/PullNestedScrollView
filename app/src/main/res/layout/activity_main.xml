@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--
+        首先是最顶上的图片
+        layout_marginTop = -100dp, 这样就让这个图片可以显示的只有200dp高度的内容
+
+        这里的高度设置要注意，保证是三段式的，
+        1）ImageView的高度是3个单位
+        2）marginTop是-1个单位，ImageView自己隐藏1/3
+        3）底下的PullNestedScrollView的子View再通过marginTop=1个单位，再隐藏1/3
+    -->
+    <ImageView
+        android:id="@+id/iv_header_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="-100dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/the_myth"
+        android:scaleType="centerCrop"/>
+    <!--
+        这个View是match_parent的，
+        所有它的有效touch范围是整个手机屏幕
+
+        headerVisibleHeight这个值保证是ImageView的高度的1/3
+    -->
+    <net.jiawa.pullnestedscrollview.widgets.PullNestedScrollView
+        android:id="@+id/pnv_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        app:header="@id/iv_header_image"
+        app:headerVisibleHeight="100dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--
+                这里的layout_marginTop="100dp"，就遮住了顶部的图片剩余可以显示的200dp中的一半
+                现在顶部的图片可以显示的有效高度只有100dp
+
+                这个这里的layout_marginTop也要保证是上面的ImageView的高度的1/3
+            -->
+            <ViewStub
+                android:id="@+id/lay_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="100dp"
+                android:background="#eee"/>
+
+        </LinearLayout>
+    </net.jiawa.pullnestedscrollview.widgets.PullNestedScrollView>
+</RelativeLayout>

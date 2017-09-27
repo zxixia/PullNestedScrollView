@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MovieStar">
+        <attr name="MovieStars" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="PullNestedScrollView">
+        <attr name="header" format="reference" />
+        <attr name="headerVisibleHeight" format="dimension" />
+    </declare-styleable>
+</resources>

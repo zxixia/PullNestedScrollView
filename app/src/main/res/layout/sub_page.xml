@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:paddingLeft="9dp"
+    android:paddingRight="9dp">
+
+    <!-- 顶部的基本信息栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <!-- 左侧的片名，上映日期，类型 -->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:text="神话"/>
+
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="12dp"
+                android:layout_alignParentBottom="true"
+                android:text="片长: 122分钟"/>
+
+            <TextView
+                android:id="@+id/tv_pub_dates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="12dp"
+                android:layout_above="@id/tv_duration"
+                android:text="2005-9-23(中国大陆)"/>
+
+            <TextView
+                android:id="@+id/tv_year_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="12dp"
+                android:layout_above="@id/tv_pub_dates"
+                android:text="2005 / 剧情"/>
+        </RelativeLayout>
+        <!-- 右边的分数和星星还有点赞人数 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="#fff8e1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <!-- 分数 -->
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:text="6.2分"/>
+
+            <net.jiawa.pullnestedscrollview.widgets.MovieStarView
+                android:id="@+id/ms_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:MovieStars="30" />
+
+            <TextView
+                android:id="@+id/tv_people_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="117606人" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 分割线 -->
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#c8c7cc"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+    </View>
+
+
+
+
+    <!-- 影人 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="3dp"
+            android:text="影人" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_casts"
+            android:layout_width="match_parent"
+            android:layout_height="95dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <!-- 分割线 -->
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#c8c7cc"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+    </View>
+
+    <!-- 热门短评 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="3dp"
+            android:text="热门短评" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_popular_comments"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <!-- 分割线 -->
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#c8c7cc"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+    </View>
+
+    <!-- 简介 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="3dp"
+            android:text="简介" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="4"
+                android:textColor="@android:color/black"
+                android:text="　骁勇善战的秦朝大将军蒙毅（成龙饰）受秦始皇所命，负责护送玉漱公主（金喜善饰）入秦为妃，一路上彼此情愫暗生，可蒙毅还是选择了效忠君主。秦始皇病危，蒙毅去拿长生不老药并战死沙场。而公主试药成功，在秦王死后被禁在秦王陵中…… "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/white"
+                android:text="展开" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- 分割线 -->
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#c8c7cc"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+    </View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+</LinearLayout>
