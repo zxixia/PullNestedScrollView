@@ -25,9 +25,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:textSize="26sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
+                android:textColor="@android:color/black"
                 android:text="神话"/>
 
             <TextView
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_alignParentBottom="true"
                 android:text="片长: 122分钟"/>
 
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_above="@id/tv_duration"
                 android:text="2005-9-23(中国大陆)"/>
 
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_above="@id/tv_pub_dates"
                 android:text="2005 / 剧情"/>
         </RelativeLayout>
@@ -100,9 +101,6 @@
         android:layout_marginTop="5dp">
     </View>
 
-
-
-
     <!-- 影人 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,6 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginBottom="3dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:text="影人" />
 
         <android.support.v7.widget.RecyclerView
@@ -145,12 +145,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginBottom="3dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:text="热门短评" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_popular_comments"
             android:layout_width="match_parent"
-            android:layout_height="180dp">
+            android:layout_height="145dp">
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
     <!-- 分割线 -->
@@ -173,7 +175,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginBottom="3dp"
-            android:text="简介" />
+            android:textColor="@android:color/black"
+            android:text="简介"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -185,16 +189,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="4"
-                android:textColor="@android:color/black"
                 android:text="　骁勇善战的秦朝大将军蒙毅（成龙饰）受秦始皇所命，负责护送玉漱公主（金喜善饰）入秦为妃，一路上彼此情愫暗生，可蒙毅还是选择了效忠君主。秦始皇病危，蒙毅去拿长生不老药并战死沙场。而公主试药成功，在秦王死后被禁在秦王陵中…… "/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/white"
-                android:text="展开" />
         </RelativeLayout>
     </LinearLayout>
 
