@@ -23,7 +23,7 @@
         android:scaleType="centerCrop"/>
     <!--
         这个View是match_parent的，
-        所有它的有效touch范围是整个手机屏幕
+        所以它的有效touch范围是整个手机屏幕
 
         headerVisibleHeight这个值保证是ImageView的高度的1/3
     -->

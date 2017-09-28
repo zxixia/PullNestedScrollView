@@ -31,8 +31,6 @@ public class PullNestedScrollView extends NestedScrollView {
     private static final String LOG_TAG = "PullNestedScrollView";
     /** 阻尼系数,越小阻力就越大. */
     private static final float SCROLL_RATIO = 0.5f;
-    /** 滑动至翻转的距离. */
-    private static final int TURN_DISTANCE = 100;
     /** 头部view. */
     private View mHeader;
     /** 头部view显示高度. */
@@ -56,8 +54,6 @@ public class PullNestedScrollView extends NestedScrollView {
     private boolean mIsMovingDown = false;
     /** 头部图片拖动时顶部和底部. */
     private int mCurrentTop, mCurrentBottom;
-    /** 状态变化时的监听器. */
-    private OnTurnListener mOnTurnListener;
     /**
      * 保存顶部图片的最原始的left, top, right, bottom
      */
@@ -101,15 +97,6 @@ public class PullNestedScrollView extends NestedScrollView {
         mHeader = view;
     }
 
-    /**
-     * 设置状态改变时的监听器
-     *
-     * @param turnListener
-     */
-    public void setOnTurnListener(OnTurnListener turnListener) {
-        mOnTurnListener = turnListener;
-    }
-
     @Override
     protected void onFinishInflate() {
         if (getChildCount() > 0) {
@@ -136,27 +123,6 @@ public class PullNestedScrollView extends NestedScrollView {
              * 2，滑动横向RecyclerView
              * 3，然后顶部的header会突变一下，调用log如下
              *
-             [  107][onLayoutChange][net.jiawa.jobhunter.widgets.PullNestedScrollView$1]
-             [17532][layout][android.view.View]
-             [ 1079][onLayout][android.widget.RelativeLayout]
-             [17523][layout][android.view.View]
-             [ 5618][layout][android.view.ViewGroup]
-             [  323][layoutChildren][android.widget.FrameLayout]
-             [  261][onLayout][android.widget.FrameLayout]
-             [17523][layout][android.view.View]
-             [ 5618][layout][android.view.ViewGroup]
-             [ 1741][setChildFrame][android.widget.LinearLayout]
-             [ 1585][layoutVertical][android.widget.LinearLayout]
-             [ 1494][onLayout][android.widget.LinearLayout]
-             [17523][layout][android.view.View]
-             [ 5618][layout][android.view.ViewGroup]
-             [  323][layoutChildren][android.widget.FrameLayout]
-             [  261][onLayout][android.widget.FrameLayout]
-             [17523][layout][android.view.View]
-             [ 5618][layout][android.view.ViewGroup]
-             [ 1741][setChildFrame][android.widget.LinearLayout]
-             [ 1585][layoutVertical][android.widget.LinearLayout]
-             *
              */
             mHeader.scrollTo(0, scrollY);
         }
@@ -179,53 +145,6 @@ public class PullNestedScrollView extends NestedScrollView {
      * 针对的是内嵌垂直的Nested子View，它会抢占Touch事件,然后通过requestDisallowInterceptTouchEvent
      * 阻止当前View进入onInterceptTouchEvent，此时当前View无法响应onTouch
      * 只能通过子View将多余的touch量从onNestedScroll传递回来
-     *
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][DOWN: false, y: 548.7142, ]
-     [  155][onStartNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView]
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 556.71, ]
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 564.31885, ]
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 569.4789, ]
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 577.67615, ]
-     [  200][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 587.59784, ]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -15, dyUnconsumed: 0]
-     [  148][requestDisallowInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][requestDisallowInterceptTouchEvent: true]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -9, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -15, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -14, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -15, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -13, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -13, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -15, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -16, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -17, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -15, dyUnconsumed: 0]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: -3, dyUnconsumed: -13]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -18]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -17]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -17]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -17]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -16]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -21]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -20]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -21]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -18]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -23]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -21]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -20]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -20]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -20]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -19]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -18]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -16]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -13]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -13]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -12]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -10]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -9]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -8]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -7]
-     [  180][onNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView][dyConsumed: 0, dyUnconsumed: -1]
-     [  186][onStopNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView]
      *
      */
     @Override
@@ -261,15 +180,6 @@ public class PullNestedScrollView extends NestedScrollView {
      * 拦截，然后进入当前View的onTouch事件
      * 同时注意要将mStartPoint的坐标重置，而且只会进一次，
      * onInterceptTouchEvent返回true以后，将不会再次进入这个方法
-     *
-     [  259][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][DOWN: false, y: 1209.3701, ]
-     [  155][onStartNestedScroll][net.jiawa.jobhunter.widgets.PullNestedScrollView]
-     [  259][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: false, y: 1226.1425, ]
-     [  259][onInterceptTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][MOVE: true, y: 1249.9808, ]
-     [  331][onTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][Y: 1287.947]
-     [  331][onTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][Y: 1328.0593]
-     [  331][onTouchEvent][net.jiawa.jobhunter.widgets.PullNestedScrollView][Y: 1378.5145]
-     *
      *
      */
     @Override
@@ -526,11 +436,6 @@ public class PullNestedScrollView extends NestedScrollView {
             mContentView.startAnimation(innerAnim);
         }
         mContentView.layout(mContentRect.left, mContentRect.top, mContentRect.right, mContentRect.bottom);
-
-        // 回调监听器
-        if (mCurrentTop > mHeaderRect.top + TURN_DISTANCE && mOnTurnListener != null){
-            mOnTurnListener.onTurn();
-        }
     }
 
     /**
@@ -538,17 +443,5 @@ public class PullNestedScrollView extends NestedScrollView {
      */
     private boolean isNeedAnimation() {
         return !mContentRect.isEmpty() && (mIsMovingDown || mNestedScrollDeltaY > 0) && getScrollY() == 0;
-    }
-
-    /**
-     * 翻转事件监听器
-     *
-     * @author markmjw
-     */
-    public interface OnTurnListener {
-        /**
-         * 翻转回调方法
-         */
-        public void onTurn();
     }
 }
